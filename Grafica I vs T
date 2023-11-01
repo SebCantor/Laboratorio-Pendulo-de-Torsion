@@ -1,0 +1,40 @@
+import matplotlib.pyplot as plt
+import matplotlib
+import numpy as np
+
+fig = plt.figure()
+ax = fig.add_subplot()
+fig.subplots_adjust(top=0.85)
+
+# Datos
+r = [0.3, 0.25, 0.2, 0.15, 0.1, 0.05,0]
+t = [2.40205, 1.982625, 1.637125, 1.3405, 1.02475, 0.793625, 0.69575]
+
+# Crear la grafica
+plt.plot(r, t, 'r^')
+
+# Agregar etiquetas a los ejes y titulo
+plt.xlabel('Radio(m)')
+plt.ylabel('Periodo(s)')
+plt.title('Grafica distancia de la masa vs periodo')
+
+
+
+
+
+# Definir los puntos
+x = np.array([0.3, 0.25, 0.2, 0.15, 0.1, 0.05,0]) # valores de x
+y = np.array([2.40205, 1.982625, 1.637125, 1.3405, 1.02475, 0.793625, 0.69575]) # valores de y
+
+# Añadir una columna de unos a x para tener el término independiente en la ecuación de la recta
+X = np.vstack([x, np.ones(len(x))]).T
+
+# Calcular la pendiente y el término independiente
+m, c = np.linalg.lstsq(X, y, rcond=None)[0]
+
+# Imprimir la ecuación de la recta
+print(f"La ecuación de la recta es y = {m}x + {c}")
+ax.text(0, 2, f'La ecuación de la recta es y = {m}x + {c}') 
+# Mostrar la gráfica
+plt.grid(True)
+plt.show()
